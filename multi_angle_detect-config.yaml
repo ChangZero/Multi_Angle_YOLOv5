@@ -1,0 +1,8 @@
+cam1:
+    cam1_path: ""
+    cam1_weights: ""
+    cam1_video: ""
+cam2:
+    cam2_path: ""
+    cam2_weights: ""
+    cam2_video: ""
