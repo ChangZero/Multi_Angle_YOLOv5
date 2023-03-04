@@ -48,11 +48,6 @@ if str(ROOT) not in sys.path:
     sys.path.append(str(ROOT))  # add ROOT to PATH
 ROOT = Path(os.path.relpath(ROOT, Path.cwd()))  # relative
 
-# Rule based completed cls transformation constraints
-EPSILON = 100
-IOU = 0.5
-WRENCH_STAY_TIME = 3
-
 
 # Center-based clustering ID_tracking function
 def h_distance(xyxy, h_location):
@@ -75,7 +70,6 @@ def compare_intersection(w_xyxy, h_xyxy):
     if h_area==0:
         return 0
     x_length = min(w_xyxy[2], h_xyxy[2]) - max(w_xyxy[0], h_xyxy[0])
-    x_length = min(w_xyxy[2], h_xyxy[2]) - max(w_xyxy[0], h_xyxy[0])
     y_length = min(w_xyxy[1], h_xyxy[1]) - max(w_xyxy[3], h_xyxy[3])
     intersection_area = x_length * y_length
     
@@ -96,7 +90,7 @@ def init_json(file_path):
     with open(file_path, 'w', encoding='utf-8') as file:
         json.dump(h_status, file)
     return h_status
-   
+ 
 def init_detbox(detbox):
     detbox = {
         'h1': [1, 2, 1, 2],
@@ -110,11 +104,13 @@ def init_detbox(detbox):
     }
     return detbox
 
+
 @smart_inference_mode()
 def run(
         weights=ROOT / 'yolov5s.pt',  # model path or triton URL
         source=ROOT / 'data/images',  # file/dir/URL/glob/screen/0(webcam)
         data=ROOT / 'data/coco128.yaml',  # dataset.yaml path
+        h_info_path = ROOT,
         imgsz=(640, 640),  # inference size (height, width)
         conf_thres=0.85,  # confidence threshold
         iou_thres=0.45,  # NMS IOU threshold
@@ -139,32 +135,15 @@ def run(
         half=False,  # use FP16 half-precision inference
         dnn=False,  # use OpenCV DNN for ONNX inference
         vid_stride=1,  # video frame-rate stride
+        epsilon = 100,
+        iou = 0.5,
+        wst = 3
 ):
-
-    # fixed hole location
-    # # train_hole
-    # h_location = {
-    #     'h1': (773, 703),
-    #     'h2': (1001, 831),
-    #     'h3': (1029, 587),
-    #     'h4': (1294, 795),
-    #     'h5': (1331, 509),
-    #     # 'h6': (1526, 345),
-    #     # 'h7': (1569, 336),
-    # }
     
-    # test_hole
-    h_location = {
-        'h1': (834, 928),
-        'h2': (1094, 761),
-        'h3': (1024, 1133),
-        'h4': (1442, 659),
-        'h5': (1421, 1103),
-        # 'h6': (1526, 345),
-        # 'h7': (1569, 336),
-    }
+    with open(h_info_path, 'r', encoding='utf-8') as file:
+        h_location = json.load(file)
     
-    # detection info storage
+    # detection info storage 
     detbox = {
         'h1': [1, 2, 1, 2],
         'h2': [1, 2, 1, 2],
@@ -175,11 +154,11 @@ def run(
         'h7': [1, 2, 1, 2],
         'wrench': [1, 2, 1, 2]
     }
-    
-    file_path = './cam2_h_status.json'
+    file_path = './cam1_h_status.json'
     h_status = init_json(file_path)
     wrench_stay = 0
-    
+
+
     save_img = not nosave and not source.endswith(
         '.txt')  # save inference images
     is_file = Path(source).suffix[1:] in (IMG_FORMATS + VID_FORMATS)
@@ -242,12 +221,12 @@ def run(
 
         # Second-stage classifier (optional)
         # pred = utils.general.apply_classifier(pred, classifier_model, im, im0s)
-
+            
         # Process predictions
         for i, det in enumerate(pred):  # per image
             flag = 0 # wrench detect T/F
             detbox = init_detbox(detbox)
-            if i%7==0:
+            if i%23 ==0:
                 with open(file_path, 'r') as file:
                     h_status = json.load(file)
                     
@@ -330,15 +309,15 @@ def run(
                 
                 # completed transformation Rule
                 if (flag == 1):
-                    if (w_to_h[1] <= EPSILON) & (compare_intersection(w_xyxy=detbox["wrench"], h_xyxy=detbox[w_to_h[0]]) >= IOU):
+                    if (w_to_h[1] <= epsilon) & (compare_intersection(w_xyxy=detbox["wrench"], h_xyxy=detbox[w_to_h[0]]) >= iou):
                         wrench_stay += 1
-                        if (wrench_stay == WRENCH_STAY_TIME):
+                        if (wrench_stay == wst):
                             h_status[w_to_h[0]] = 4
                             wrench_stay = 0
                 else:
                     wrench_stay = 0
                 
-                if i % 7 ==0:    
+                if i % 23 == 0:
                     with open(file_path, 'w', encoding='utf-8') as file:
                         json.dump(h_status, file, indent='\t')
 
@@ -400,6 +379,8 @@ def parse_opt():
                         'data/images', help='file/dir/URL/glob/screen/0(webcam)')
     parser.add_argument('--data', type=str, default=ROOT /
                         'data/coco128.yaml', help='(optional) dataset.yaml path')
+    parser.add_argument('--h_info_path', type=str, default=ROOT,
+                        help='h_info_path')
     parser.add_argument('--imgsz', '--img', '--img-size', nargs='+',
                         type=int, default=[640], help='inference size h,w')
     parser.add_argument('--conf-thres', type=float,
@@ -447,6 +428,12 @@ def parse_opt():
                         help='use OpenCV DNN for ONNX inference')
     parser.add_argument('--vid-stride', type=int, default=1,
                         help='video frame-rate stride')
+    parser.add_argument('--epsilon', type=int, default=100,
+                        help='Rule based constraints distance')
+    parser.add_argument('--iou', type=float, default=0.5,
+                        help='Rule based constraints intersection area')
+    parser.add_argument('--wst', type=int, default=3,
+                        help='Rule based constraints wrench stay time')
     opt = parser.parse_args()
     opt.imgsz *= 2 if len(opt.imgsz) == 1 else 1  # expand
     print_args(vars(opt))
