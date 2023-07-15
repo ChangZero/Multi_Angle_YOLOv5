@@ -1,6 +1,7 @@
 # Detection of Engine Hose Misconnections Using Deep Learning-Based Object Recognition
 
 -   [2023 spirng KIIE(Korean Institute of Industrial Engineers) Poster](https://github.com/Dais-lab/Multi_Angle_engine_clamp_detection/blob/main/2023_spirng_KIIE(Korean%20Institute%20of%20Industrial%20Engineers)%20Poster.pdf)
+-   [Presentation_pdf](https://github.com/Dais-lab/Multi_Angle_YOLOv5/blob/main/ppt.pdf)
 
 ## 1. Project Abstract
 
