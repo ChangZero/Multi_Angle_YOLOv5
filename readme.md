@@ -35,6 +35,8 @@ The proposed technology in this study can be extended and applied to various man
 -   Opencv-python
 -   Pandas
 -   Numpy
+-   matplotlib
+-   scipy
 
 ## 3. Getting Start
 
