@@ -1,4 +1,4 @@
-# Detection of Engine Hose Misconnections Using Deep Learning-Based Object Recognition
+# Detection of Engine Hose Missing engagement Using Deep Learning-Based Object Recognition
 
 -   [2023 spirng KIIE(Korean Institute of Industrial Engineers) Poster](https://github.com/Dais-lab/Multi_Angle_engine_clamp_detection/blob/main/2023_spirng_KIIE(Korean%20Institute%20of%20Industrial%20Engineers)%20Poster.pdf)
 -   [Presentation_pdf](https://github.com/Dais-lab/Multi_Angle_YOLOv5/blob/main/ppt.pdf)
@@ -7,9 +7,9 @@
 
 ### Abstract
 
-In this study, we developed a technology that utilizes deep learning-based object recognition to detect real-time engine hose misconnections caused by worker errors. We trained a model to detect the connection points and tools (wrenches) within the target engine, using CCTV footage capturing the work process. Based on the inferred task completion, the model predicts the status of each connection point. To address the issue of obstructed footage due to the worker's movements, we applied the Multi-Angle Processing technique, which combines video footage captured from different angles.
+In this study, we developed a technology that utilizes deep learning-based object recognition to detect real-time engine hose missing engagement caused by worker errors. We trained a model to detect the connection points and tools (wrenches) within the target engine, using CCTV footage capturing the work process. Based on the inferred task completion, the model predicts the status of each connection point. To address the issue of obstructed footage due to the worker's movements, we applied the Multi-Angle Processing technique, which combines video footage captured from different angles.
 
-We used the YOLOv5 model, a one-stage detection model, for object recognition. Experimental results showed that when setting the threshold at 0.5 based on mean average precision (mAP), the results were above 0.995 for each class. By applying the Multi-Angle Processing technique, the overall misconnection rate decreased from 0.58 to 0.14 compared to a single CCTV footage.
+We used the YOLOv5 model, a one-stage detection model, for object recognition. Experimental results showed that when setting the threshold at 0.5 based on mean average precision (mAP), the results were above 0.995 for each class. By applying the Multi-Angle Processing technique, the overall missing engagement rate decreased from 0.58 to 0.14 compared to a single CCTV footage.
 
 The proposed technology in this study can be extended and applied to various manufacturing sites where worker errors leading to work omissions can be detected using CCTV footage.
 
