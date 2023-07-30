@@ -23,9 +23,9 @@ The proposed technology in this study can be extended and applied to various man
 [`Sudong Lee`](https://dais.ulsan.ac.kr/)
 
 #### Contribution
-- [`Changyeong Kim`](https://github.com/ChangZero) &nbsp; PM• Model Training• ID-fixing• Switch Wrench Engagement• Multi-Angle detection
-- [`Hyungun Cho`](https://github.com/Chohyungun) &nbsp; Data Preprocessing• Model Training  
-- [`Junhyuk Choi`](https://github.com/sxs770)&nbsp; K-means based Extracting Hole Center•NGWD 
+- [`Changyeong Kim`](https://github.com/ChangZero) &nbsp; PM• Model Training• ID-fixing• Switch Wrench Engagement• Multi-Angle detection• Presentation
+- [`Hyungun Cho`](https://github.com/Chohyungun) &nbsp; K-means based Extracting Hole Center• NGWD   
+- [`Junhyuk Choi`](https://github.com/sxs770)&nbsp; Data Preprocessing• Model Training 
 
 ## 2. Tool
 
