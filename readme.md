@@ -83,7 +83,14 @@ docker build --tag ma-yolo-image .
 - [IDE] : Visual Studio Code
 - [Collaboration Tool] : Notion, Discord
 
-## 5. License
+## 5. Competitions
+* UOU Creative Comprehensive Design Competition(UOU 창의적 종합 설계 경진대회, 2023)
+* Engineering FestivalCreative Comprehensive Design Competition(공학페스티벌 창의적 종합 설계 경진대회, 2023)
+
+## 6. Awards
+* Encouragement Prize on Engineering FestivalCreative Comprehensive Design Competition, Ministry of Trade, Industry and Energy(MOTIE), Korea Institute for Advancement of technolohy(KIAT), Research & Information Center for innovation Engineering Education(RICE)
+* Grand prize on UOU Creative Comprehensive Design Competition, University of Ulsan Engineering Education Innovation Center
+## 7. License
 
 This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
 
