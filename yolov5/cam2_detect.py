@@ -156,7 +156,7 @@ def run(
         'wrench': [1, 2, 1, 2]
     }
     
-    file_path = './cam2_h_status.json'
+    file_path = './hole_json_file/cam2_h_status.json'
     h_status = init_json(file_path)
     wrench_stay = 0
     

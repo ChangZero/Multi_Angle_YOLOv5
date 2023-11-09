@@ -4,6 +4,8 @@ import multiprocessing
 from multiprocessing import Process
 import json
 
+
+# 
 class CamInfo:
     def __init__(self, data):
         self.detect_path = data['detect_path']
@@ -14,11 +16,12 @@ class CamInfo:
         self.epsilon = data['epsilon']
         self.iou = data['iou']
         self.wst = data['wst']
-     
+
+# Run the process
 def exec_thread(cam):
     print("detection start!")
     subprocess.run(["python", cam.detect_path, "--weights", cam.weights, "--source", cam.video_path, "--h_info_path", cam.h_info_path, "--conf-thres", cam.conf_thres, "--epsilon", cam.epsilon, "--iou", cam.iou, "--wst", cam.wst])
-    print("cam2 detection end!")
+    print("detection end!")
     
     
 def main():
@@ -45,8 +48,8 @@ def main():
         cam2_h_status = dict()
         result = dict()
 
-        filepath1 = "./cam1_h_status.json"
-        filepath2 = "./cam2_h_status.json"
+        filepath1 = "./hole_json_file/cam1_h_status.json"
+        filepath2 = "./hole_json/file/cam2_h_status.json"
         resultfilepath = "./result.json"
         with open(filepath1, 'r+') as file:
             cam1_h_status = json.load(file)
@@ -54,6 +57,7 @@ def main():
         with open(filepath2, 'r+') as file:
             cam2_h_status = json.load(file)
 
+        # Merge the results
         h_idx = 0
         for cam1_h, cam2_h in zip(cam1_h_status.values(), cam2_h_status.values()):
             h_idx += 1
