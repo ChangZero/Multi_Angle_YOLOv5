@@ -51,14 +51,14 @@ git clone https://github.com/ChangZero/Multi_Angle_engine_clamp_detection.git
 Fill in the multi_angle_detect-config.yaml
 ```
 cam1:
-    detect_path: ""
-    weights: ""
-    video_path: ""
-    h_info_path: ""
-    conf-thres: "0.65"
-    epsilon: "100"
-    iou: "0.5"
-    wst: "3"
+    detect_path: "" # cam1_detect.py path
+    weights: "" # cam1_weights.pt_path
+    video_path: "" # cam_video path
+    h_info_path: "" # h_info_paht; ex) ./hole_json_file/cam1_h_info.json
+    conf-thres: "0.65" # confidence threshold
+    epsilon: "100" # Distance from hole to wrench head threshold
+    iou: "0.5" # Interaction over Union threshold
+    wst: "3" # wrench head stay time
 
 cam2:
     detect_path: ""
@@ -70,7 +70,18 @@ cam2:
     iou: "0.5"
     wst: "3"
 ```
-
+Fill in the ./hole_json_file/cam{number}_h_info_json`s hole location infomation
+```
+{
+    "h1": [0, 0],
+    "h2": [0, 0],
+    "h3": [0, 0],
+    "h4": [0, 0],
+    "h5": [0, 0],
+    "h6": [0, 0],
+    "h7": [0, 0]
+}
+```
 ### Build dockerfile
 ```
 docker build --tag ma-yolo-image .
