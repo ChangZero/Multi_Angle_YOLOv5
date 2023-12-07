@@ -1,18 +1,13 @@
-# Development of an automated inspection system for engine hose assembly using deep learning-based object detection
+# Development of an Automated Inspection System for Hydraulic Control Unit Hose Assembly Process using Deep Learning-based Object Detection
 
--   [2023 spirng KIIE(Korean Institute of Industrial Engineers) Poster](https://github.com/Dais-lab/Multi_Angle_engine_clamp_detection/blob/main/2023_spirng_KIIE(Korean%20Institute%20of%20Industrial%20Engineers)%20Poster.pdf)
--   [Presentation_pdf](https://github.com/Dais-lab/Multi_Angle_YOLOv5/blob/main/ppt.pdf)
 -   In the progress, KCI Paper
 
 ## 1. Project Abstract
 
 ### Abstract
 
-In this study, we developed a technology that utilizes deep learning-based object recognition to detect real-time engine hose missing engagement caused by worker errors. We trained a model to detect the connection points and tools (wrenches) within the target engine, using CCTV footage capturing the work process. Based on the inferred task completion, the model predicts the status of each connection point. To address the issue of obstructed footage due to the worker's movements, we applied the Multi-Angle Processing technique, which combines video footage captured from different angles.
-
-We used the YOLOv5 model, a one-stage detection model, for object recognition. Experimental results showed that when setting the threshold at 0.5 based on mean average precision (mAP), the results were above 0.995 for each class. By applying the Multi-Angle Processing technique, the overall missing engagement rate decreased from 0.58 to 0.14 compared to a single CCTV footage.
-
-The proposed technology in this study can be extended and applied to various manufacturing sites where worker errors leading to work omissions can be detected using CCTV footage.
+This study automates quality inspection in hydraulic control device hose assembly using deep learning-based object detection. Human errors in manufacturing contribute significantly to defects, necessitating an automated solution. The proposed system addresses challenges, including distinguishing pre-assembly and assembly completion states, limited detection for small-sized parts, real-time feedback importance, providing hose connection point status, and overcoming blind spots during object detection.
+The system utilizes YOLOv5 for object detection, introduces a novel assembly state transition algorithm, and employs multi-camera object detection with Python-based multiprocessing. Experimental results showcase successful state transitions, high small object detection rates, and improved performance in detecting assembly completion through multi-camera analysis. This system effectively minimizes errors in the hydraulic control device hose assembly process.
 
 ### Contributors
 
